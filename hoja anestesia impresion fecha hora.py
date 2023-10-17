@@ -48,7 +48,7 @@ def main():
     hoja.peso = input("Peso del paciente: ")
     hoja.procedimiento = input("Procedimiento: ")
     hoja.fecha = datetime.date.today().strftime("%Y-%m-%d")
-    hoja.hora = input("Hora: ")
+    hoja.hora = datetime.datetime.now().strftime("%H:%M:%S")
     hoja.anestesiologo = input("Nombre del anestesiólogo: ")
 
     while True:

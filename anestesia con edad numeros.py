@@ -3,7 +3,7 @@ import datetime
 class HojaAnestesia:
     def __init__(self):
         self.paciente_nombre = ""
-        self.edad = ""
+        self.edad = 0
         self.peso = ""
         self.procedimiento = ""
         self.fecha = ""
@@ -40,15 +40,26 @@ class HojaAnestesia:
             for clave, valor in signos.items():
                 print(f"  - {clave}: {valor}")
 
+def obtener_edad():
+    while True:
+        try:
+            edad = int(input("Edad del paciente: "))
+            if 0 <= edad <= 120:
+                return edad
+            else:
+                print("La edad debe estar en el rango de 0 a 120.")
+        except ValueError:
+            print("Por favor, ingrese una edad válida (número entero).")
+
 def main():
     hoja = HojaAnestesia()
 
     hoja.paciente_nombre = input("Nombre del paciente: ")
-    hoja.edad = input("Edad del paciente: ")
+    hoja.edad = obtener_edad()
     hoja.peso = input("Peso del paciente: ")
     hoja.procedimiento = input("Procedimiento: ")
     hoja.fecha = datetime.date.today().strftime("%Y-%m-%d")
-    hoja.hora = input("Hora: ")
+    hoja.hora = datetime.datetime.now().strftime("%H:%M:%S")
     hoja.anestesiologo = input("Nombre del anestesiólogo: ")
 
     while True:
@@ -78,7 +89,7 @@ def main():
     with open(nombre_archivo, "w") as archivo:
         archivo.write("Hoja de Anestesia\n")
         archivo.write("Paciente: " + hoja.paciente_nombre + "\n")
-        archivo.write("Edad: " + hoja.edad + "\n")
+        archivo.write("Edad: " + str(hoja.edad) + "\n")
         archivo.write("Peso: " + hoja.peso + "\n")
         archivo.write("Procedimiento: " + hoja.procedimiento + "\n")
         archivo.write("Fecha: " + hoja.fecha + "\n")
